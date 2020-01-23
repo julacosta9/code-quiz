@@ -33,20 +33,25 @@ let questions = [
   }
 ];
 
+var timerInterval;
+
+function startTimer() {
+  setInterval(function() {
+    console.log("Start Timer");
+    time.text(timeLeft);
+    timeLeft--;
+  }, 1000);
+}
+
 startBtn.on("click", function() {
   time.text(timeLeft);
   startBtn.remove();
   displayQuestion();
+  timerInterval = setInterval(startTimer, 1000);
 
-  var timerInterval = setInterval(function() {
-    console.log("Start Timer");
-    time.text(timeLeft);
-    timeLeft--;
-
-    if (timeLeft === 0) {
-      clearInterval(timerInterval);
-    }
-  }, 1000);
+  // if (timeLeft === 0) {
+  //   clearInterval(timerInterval);
+  // }
 
   $(".answer-btn").on("click", displayQuestion);
   $(".answer-btn").on("click", updateScore);
@@ -74,11 +79,20 @@ function displayQuestion() {
 
 function updateScore() {
   let answerChosen = this.getAttribute("data-index");
+  console.log(answerChosen);
 
-  if (answerChosen === questions[questionCounter].correctAnswer) {
-    score++;
+  if (questions[questionCounter]) {
+    if (answerChosen == questions[questionCounter].correctAnswer) {
+      score++;
+      console.log("User answered a question correctly. New score: " + score);
+    } else {
+      timeLeft -= 10;
+      time.text(timeLeft);
+      console.log("Time penalty. New time: " + timeLeft);
+    }
   } else {
-    timeLeft -= 10;
+    console.log("No questions left");
+    return;
   }
 }
 
