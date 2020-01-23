@@ -1,13 +1,25 @@
-#wrapper {
-    /* width: 500px; */
-
+#header-container {
+  background: coral;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-#header {
-    background: blue;
-    height: 65px;
-    padding-right:0;
-    padding-left:0;
-    margin-right:auto;
-    margin-left:auto
+#header-row {
+  height: 65px;
+}
+
+#wrapper {
+  width: 70vw;
+}
+
+#main-text {
+  font-size: calc(16px + 3vw);
+  font-weight: 600;
+}
+
+.answer-btn {
+  margin: 5px 0 20px 0;
+  font-weight: 800;
 }

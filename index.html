@@ -16,16 +16,23 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="style.css">
 
+	<!-- jQuery -->
+	<script
+	src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-    <div class="container-fluid" id="header">
-        <div class="row">
-            <div class="col-6">
-                <p class="float-left">ASDF</p>
+    <div class="container-fluid" id="header-container">
+        <div class="row mx-auto" id="header-row">
+            <div class="col-6 text-left my-auto">
+                View Highscores
             </div>
-            <div class="col-6">
-                <p class="float-right">1234</p>
+            <div class="col-6 text-right my-auto">
+								<!-- <p class="float-right">1234</p> -->
+								Time: <span id="time">--</span>
             </div>
         </div>
     </div>
@@ -47,7 +54,7 @@
 		</div>
 	</div>
 
-	<!-- <script src="script.js"></script> -->
+	<script src="script.js"></script>
 
 </body>
 

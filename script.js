@@ -1,29 +1,95 @@
-// http://gif-explode.com/?explode=https://i.imgur.com/XX0Tefj.gif
+let mainText = $("#main-text");
+let questionText = $("#question-text");
+let startBtn = $("#start-btn");
+let time = $("#time");
 
-// Quiz Questions: https://www.w3schools.com/quiztest/quiztest.asp?qtest=JavaScript
+let timeLeft = 100;
+let score = 0;
+let questionCounter = 0;
 
-// set up basic html first
+let questions = [
+  {
+    question: "Who is the strongest?",
+    answers: {
+      1: "Superman",
+      2: "The Terminator",
+      3: "Waluigi, obviously",
+      4: "All of the above",
+      5: "None of the above"
+    },
+    correctAnswer: 3
+  },
 
-// grab ids
+  {
+    question: "What's my favorite color?",
+    answers: {
+      1: "Blue",
+      2: "Red",
+      3: "Green",
+      4: "All of the above",
+      5: "None of the above"
+    },
+    correctAnswer: 1
+  }
+];
 
-// eventlistener on click 
-    // start timer and begin keeping score
+startBtn.on("click", function() {
+  time.text(timeLeft);
+  startBtn.remove();
+  displayQuestion();
 
+  var timerInterval = setInterval(function() {
+    console.log("Start Timer");
+    time.text(timeLeft);
+    timeLeft--;
 
+    if (timeLeft === 0) {
+      clearInterval(timerInterval);
+    }
+  }, 1000);
 
-// high score function
-    // keep highscores in object. try using construction function (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
+  $(".answer-btn").on("click", displayQuestion);
+  $(".answer-btn").on("click", updateScore);
+});
 
-function Player (name, score) {
-    this.name = name;
-    this.score = score;
+function displayQuestion() {
+  questionText.empty();
+  if (questionCounter >= questions.length) {
+    console.log("display end game results");
+  } else {
+    mainText.text(questions[questionCounter].question);
+    let numOfAnswers = Object.keys(questions[questionCounter].answers).length;
+
+    for (let i = 0; i < numOfAnswers; i++) {
+      let btn = $("<button>");
+      btn.addClass("btn btn-primary answer-btn");
+      btn.attr("data-index", i + 1);
+      btn.text(questions[questionCounter].answers[i + 1]);
+      questionText.append(btn);
+      questionText.append("<div></div>");
+    }
+    questionCounter++;
+  }
 }
 
-let highscores = []
+function updateScore() {
+  let answerChosen = this.getAttribute("data-index");
 
-highscores.push(new Player ("Julian", 10)); // run this the player 
-  
-  // sort by value
-highscores.sort(function (a, b) {
-    return b.score - a.score; // sort from largest to smallest
-});
+  if (answerChosen === questions[questionCounter].correctAnswer) {
+    score++;
+  } else {
+    timeLeft -= 10;
+  }
+}
+
+// function setTime() {
+//   var timerInterval = setInterval(function() {
+//     console.log("asdf");
+//     time.text(timeLeft);
+//     timeLeft--;
+
+//     if (timeLeft === 0) {
+//       clearInterval(timerInterval);
+//     }
+//   }, 1000);
+// }
