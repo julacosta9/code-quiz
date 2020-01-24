@@ -3,7 +3,7 @@ let questionText = $("#question-text");
 let startBtn = $("#start-btn");
 let time = $("#time");
 
-let timeLeft = 100;
+let timeLeft = 2;
 let score = 0;
 let questionCounter = 0;
 
@@ -36,26 +36,32 @@ let questions = [
 var timerInterval;
 
 function startTimer() {
-  setInterval(function() {
-    console.log("Start Timer");
+  const timer = setInterval(function() {
     time.text(timeLeft);
     timeLeft--;
-  }, 1000);
+    if (timeLeft <= -1) {
+      clearInterval(timer);
+    }
+  },1000)
 }
+  
+//   setInterval(function() {
+//     console.log("Start Timer");
+//     time.text(timeLeft);
+//     timeLeft--;
+//   }, 1000);
+// }
 
 startBtn.on("click", function() {
   time.text(timeLeft);
   startBtn.remove();
   displayQuestion();
-  timerInterval = setInterval(startTimer, 1000);
+  startTimer();
 
-  // if (timeLeft === 0) {
-  //   clearInterval(timerInterval);
-  // }
 
-  $(".answer-btn").on("click", displayQuestion);
-  $(".answer-btn").on("click", updateScore);
 });
+
+
 
 function displayQuestion() {
   questionText.empty();
@@ -71,7 +77,7 @@ function displayQuestion() {
       btn.attr("data-index", i + 1);
       btn.text(questions[questionCounter].answers[i + 1]);
       questionText.append(btn);
-      questionText.append("<div></div>");
+      questionText.append("<br>");
     }
     questionCounter++;
   }
@@ -95,6 +101,9 @@ function updateScore() {
     return;
   }
 }
+
+$(document).on("click", '.answer-btn', displayQuestion);
+$(document).on("click", '.answer-btn', updateScore)
 
 // function setTime() {
 //   var timerInterval = setInterval(function() {
