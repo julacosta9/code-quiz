@@ -1,9 +1,10 @@
 let mainText = $("#main-text");
 let questionText = $("#question-text");
 let startBtn = $("#start-btn");
-let time = $("#time");
+let timeContainer = $("#time");
 
-let timeLeft = 2;
+let timer;
+let timeLeft = 100;
 let score = 0;
 let questionCounter = 0;
 
@@ -33,40 +34,43 @@ let questions = [
   }
 ];
 
-var timerInterval;
+let highScores = [
+  {
+    player: "Julian",
+    score: 1000
+  },
+  {
+    player: "Harrison, Steph, and Izzy",
+    score: 9001
+  },
+  {
+    player: "Random troll",
+    score: 300
+  },
+  {
+    player: "Anon",
+    score: 70
+  },
+  {
+    player: "Jonah Hill",
+    score: 1
+  }
+];
 
 function startTimer() {
-  const timer = setInterval(function() {
-    time.text(timeLeft);
+  timer = setInterval(function() {
+    timeContainer.text(timeLeft);
     timeLeft--;
     if (timeLeft <= -1) {
       clearInterval(timer);
     }
-  },1000)
+  }, 1000);
 }
-  
-//   setInterval(function() {
-//     console.log("Start Timer");
-//     time.text(timeLeft);
-//     timeLeft--;
-//   }, 1000);
-// }
-
-startBtn.on("click", function() {
-  time.text(timeLeft);
-  startBtn.remove();
-  displayQuestion();
-  startTimer();
-
-
-});
-
-
 
 function displayQuestion() {
   questionText.empty();
   if (questionCounter >= questions.length) {
-    console.log("display end game results");
+    displayResults();
   } else {
     mainText.text(questions[questionCounter].question);
     let numOfAnswers = Object.keys(questions[questionCounter].answers).length;
@@ -79,13 +83,14 @@ function displayQuestion() {
       questionText.append(btn);
       questionText.append("<br>");
     }
-    questionCounter++;
+    // questionCounter++;
   }
 }
 
 function updateScore() {
   let answerChosen = this.getAttribute("data-index");
-  console.log(answerChosen);
+  console.log("User chose answer: " + answerChosen);
+  console.log("Correct answer is: " + questions[questionCounter].correctAnswer);
 
   if (questions[questionCounter]) {
     if (answerChosen == questions[questionCounter].correctAnswer) {
@@ -93,26 +98,49 @@ function updateScore() {
       console.log("User answered a question correctly. New score: " + score);
     } else {
       timeLeft -= 10;
-      time.text(timeLeft);
+      timeContainer.text(timeLeft);
       console.log("Time penalty. New time: " + timeLeft);
     }
   } else {
     console.log("No questions left");
     return;
   }
+
+  questionCounter++;
 }
 
-$(document).on("click", '.answer-btn', displayQuestion);
-$(document).on("click", '.answer-btn', updateScore)
+function displayResults() {
+  clearInterval(timer);
+  questionText.empty();
 
-// function setTime() {
-//   var timerInterval = setInterval(function() {
-//     console.log("asdf");
-//     time.text(timeLeft);
-//     timeLeft--;
+  let resultsMessage =
+    "You answered " +
+    score +
+    " out of " +
+    questions.length +
+    " questions correctly. You finished the quiz with " +
+    timeLeft +
+    " seconds remaining.";
 
-//     if (timeLeft === 0) {
-//       clearInterval(timerInterval);
-//     }
-//   }, 1000);
-// }
+  let btn = $("<button>");
+  btn.addClass("btn btn-primary restart-btn");
+  btn.text("Play Again");
+
+  mainText.text("Results");
+  questionText.text(resultsMessage);
+  questionText.append($("<br>"));
+  questionText.append(btn);
+}
+
+startBtn.on("click", function() {
+  // move this into some kind of function
+
+  timeContainer.text(timeLeft);
+  startBtn.remove();
+  displayQuestion();
+  startTimer();
+});
+
+$(document).on("click", ".answer-btn", updateScore);
+$(document).on("click", ".answer-btn", displayQuestion);
+// $(document).on("click", ".restart-btn", initializeQuiz);
