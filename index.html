@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Code Quiz Challenge</title>
+    <title>JavaScript Quiz</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -15,9 +15,14 @@
     />
 
     <!-- Google Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700i|Work+Sans&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="animate.css" />
 
     <!-- jQuery -->
     <script
@@ -27,22 +32,25 @@
     ></script>
   </head>
 
-  <body>
+  <body id="bootstrap-override">
     <div class="container-fluid" id="header-container">
       <div class="row mx-auto" id="header-row">
-        <div class="col-6 text-left my-auto">
-          View Highscores
+        <div class="col-6 text-left my-auto" id="viewHighScoresBtn">
+          <a href="#" class="badge badge-pill badge-light header-pills"
+            >View High Scores</a
+          >
         </div>
         <div class="col-6 text-right my-auto">
-          <!-- <p class="float-right">1234</p> -->
-          Time: <span id="time">--</span>
+          <span class="badge badge-pill badge-light header-pills"
+            >Time: <span id="time">--</span></span
+          >
         </div>
       </div>
     </div>
     <div class="container" id="wrapper">
       <div class="row" id="main-text-wrapper">
         <div class="col text-center">
-          <h1 id="main-text">Code Quiz Challenge</h1>
+          <h1 id="main-text">JavaScript Quiz</h1>
         </div>
       </div>
       <div class="row">
@@ -54,13 +62,40 @@
           </div>
         </div>
       </div>
+      <div class="row justify-content-center">
+        <div class="col-6 text-center" id="question-alert"></div>
+      </div>
       <div class="row">
         <div class="col text-center">
-          <button class="btn btn-primary btn-lg" id="start-btn">
+          <button class="btn btn-lg" id="start-btn">
             Start Quiz
           </button>
         </div>
       </div>
+      <!-- <div class="row justify-content-center">
+        <div class="col-6">
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action">
+              Highscores
+            </a>
+            <a class="list-group-item list-group-item-action">
+              Cras justo odio
+            </a>
+            <a class="list-group-item list-group-item-action"
+              >Dapibus ac facilisis in</a
+            >
+            <a class="list-group-item list-group-item-action"
+              >Morbi leo risus</a
+            >
+            <a class="list-group-item list-group-item-action"
+              >Porta ac consectetur ac</a
+            >
+            <a class="list-group-item list-group-item-action"
+              >Vestibulum at eros</a
+            >
+          </div>
+        </div>
+      </div> -->
       <!-- Highscore table -->
       <!-- <div class="row justify-content-center">
         <div class="col-8">

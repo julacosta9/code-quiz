@@ -1,5 +1,9 @@
+body {
+  font-family: "Work Sans", sans-serif;
+}
+
 #header-container {
-  background: coral;
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
   padding-right: 0;
   padding-left: 0;
   margin-right: auto;
@@ -14,12 +18,58 @@
   width: 70vw;
 }
 
+.header-pills {
+  background: rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  color: #ffffff;
+}
+
 #main-text {
-  font-size: calc(16px + 3vw);
+  font-size: calc(16px + 2.5vw);
   font-weight: 600;
+  margin-top: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+}
+
+#bootstrap-override #question-text {
+  margin-top: 20px;
+  font-size: calc(16px + 0.2vw);
+}
+
+#start-btn {
+  margin-top: 25px;
+  background: #2b5876;
+  color: #ffffff;
 }
 
 .answer-btn {
   margin: 5px 0 20px 0;
-  font-weight: 800;
+  font-size: calc(16px + 0.2vw);
+}
+
+#bootstrap-override button {
+  background: #2b5876;
+  color: #ffffff;
+}
+
+.submit-player-name-btn {
+  width: 208px;
+  margin-top: 10px;
+  background: #2b5876;
+  color: #ffffff;
+}
+
+#bootstrap-override .current-player {
+  background-color: #2b5876;
+  color: #ffffff;
+}
+
+#bootstrap-override .current-player:hover {
+  background-color: #3883b5;
+}
+
+.restart-btn {
+  background: #2b5876;
+  color: #ffffff;
 }
