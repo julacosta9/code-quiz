@@ -109,7 +109,6 @@ function displayQuestion() {
       questionText.append(btn);
       questionText.append("<br>");
     }
-    // questionCounter++;
   }
 }
 
@@ -194,7 +193,6 @@ function getPlayerName() {
     return b.score - a.score; // sort from largest to smallest
   });
   if (scoreTotal > highScores[4].score) {
-    // display highscore method and field to enter name.
     let highScoreMessage = $("<p>");
     highScoreMessage.text("New highscore! Enter your name:");
     questionText
@@ -208,11 +206,6 @@ function getPlayerName() {
           .addClass("btn submit-player-name-btn submit")
           .text("OK!")
       );
-
-    // create new player object and push to array
-    // then sort and remove last object in array
-
-    // display highscore card.
   } else {
     let btn = $("<button>");
     btn.addClass("btn btn-primary restart-btn");
