@@ -60,7 +60,7 @@ let questions = [
 
 let highScores = [
   {
-    player: "Ownen Wilson",
+    player: "Owen Wilson",
     score: 600
   },
   {
@@ -220,12 +220,20 @@ function getPlayerName() {
 function displayHighscore() {
   let playerName = $("#player-name-field").val();
 
+  
+
   if (playerName !== undefined) {
     highScores.push(new Player(playerName, scoreTotal));
     highScores.sort(function(a, b) {
       return b.score - a.score;
     });
     highScores.pop();
+  }
+
+  else {
+    highScores.sort(function(a, b) {
+      return b.score - a.score;
+    });
   }
 
   mainText.text("High Scores");
